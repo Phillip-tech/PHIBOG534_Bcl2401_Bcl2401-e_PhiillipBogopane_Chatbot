@@ -1,0 +1,147 @@
+<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Health Chatbot</title>
+ <style>
+   /* CSS styles */
+   body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f2f2f2;
+   }
+
+   .chat-container {
+     max-width: 400px;
+     margin: 20px auto;
+     background-color: #fff;
+     border-radius: 8px;
+     overflow: hidden;
+   }
+
+   .chat-box {
+     padding: 10px;
+     max-height: 300px;
+     overflow-y: scroll;
+   }
+
+   .chat-message {
+     margin-bottom: 10px;
+     padding: 8px 12px;
+     border-radius: 8px;
+   }
+
+   .bot-message {
+     background-color: #cce5ff;
+   }
+
+   .user-message {
+     background-color: #e6ffe6;
+   }
+
+   input[type="text"] {
+     width: 70%;
+     padding: 10px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     margin: 10px;
+   }
+
+   button {
+     padding: 10px 20px;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+   }
+
+   button:hover {
+     background-color: #45a049;
+   }
+
+   /* Animation */
+   @keyframes fadeIn {
+     from {
+       opacity: 0;
+     }
+     to {
+       opacity: 1;
+     }
+   }
+
+   .bot-message {
+     animation: fadeIn 0.5s ease;
+   }
+ </style>
+</head>
+<body>
+ <div class="chat-container" id="chat-container">
+   <div class="chat-box" id="chat-box">
+     <div class="chat-message bot-message">Welcome to Health Chatbot! How can I assist you today?</div>
+   </div>
+   <input type="text" id="user-input" placeholder="Type your message...">
+   <button onclick="sendMessage()">Send</button>
+   <button onclick="clearChat()">Clear</button>
+ </div>
+
+ <script>
+   function getBotResponse(userInput) {
+     // Placeholder function to simulate answering general health questions
+     const responses = [
+       "It's important to maintain a balanced diet and exercise regularly for good health.",
+       "Adequate sleep is crucial for overall health and well-being.",
+       "Staying hydrated is essential for proper bodily function.",
+       "Regular physical activity can help reduce the risk of chronic diseases.",
+       "Mental health is just as important as physical health. Remember to take care of both.",
+       "If you have specific health concerns, it's best to consult with a healthcare professional.",
+       "Taking breaks and managing stress are important for maintaining good mental health.",
+       "Eating plenty of fruits and vegetables is key to a healthy diet.",
+       "It's important to limit processed foods and sugary drinks in your diet.",
+       "Make sure to get regular check-ups and screenings to monitor your health status."
+     ];
+
+     // Return a random response
+     return responses[Math.floor(Math.random() * responses.length)];
+   }
+
+   function sendMessage() {
+     var userInput = document.getElementById("user-input").value;
+     if (userInput.trim() === "") return;
+
+     var chatBox = document.getElementById("chat-box");
+
+     // Display user message
+     var userMessage = document.createElement("div");
+     userMessage.classList.add("chat-message", "user-message");
+     userMessage.textContent = userInput;
+     chatBox.appendChild(userMessage);
+
+     // Get bot response
+     var botResponse = getBotResponse(userInput);
+
+     // Display bot response after a short delay (simulating bot processing time)
+     setTimeout(function() {
+       var botMessage = document.createElement("div");
+       botMessage.classList.add("chat-message", "bot-message");
+       botMessage.textContent = botResponse;
+       chatBox.appendChild(botMessage);
+
+       // Scroll to bottom of chat box
+       chatBox.scrollTop = chatBox.scrollHeight;
+     }, 500);
+
+     // Clear user input
+     document.getElementById("user-input").value = "";
+   }
+
+   function clearChat() {
+     var chatBox = document.getElementById("chat-box");
+     chatBox.innerHTML = ''; // Clear all chat messages
+   }
+ </script>
+</body>
+</html>
